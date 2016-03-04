@@ -22,5 +22,5 @@ class Extension(ext.Extension):
         return schema
 
     def setup(self, registry):
-        from .bot import TachikomaBackend
-        registry.add('frontend', TachikomaBackend)
+        from .bot import TachikomaFrontend
+        registry.add('frontend', TachikomaFrontend)

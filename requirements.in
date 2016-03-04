@@ -1,0 +1,4 @@
+pytest
+mopidy
+slackclient
+vcrpy
