@@ -1,5 +1,6 @@
 from __future__ import unicode_literals
 
+import json
 import zlib
 from functools import wraps
 
@@ -109,5 +110,8 @@ def test_can_connect():
 def test_gets_events():
 	frontend = make_frontend()
 	frontend.doSlackLoop(None)
-	assert "{\"text\": \"Now playing *foo* from *bar*\", " + \
-		"\"type\": \"message\", \"channel\": \"mock_channel\"}" == websocket.data
+	data = json.loads(websocket.data)
+	assert {
+		'channel': 'mock_channel',
+		'text': 'Now playing *foo* from *bar*',
+		'type': 'message'} == data
