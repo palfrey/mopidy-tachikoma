@@ -11,7 +11,9 @@ interactions:
     method: POST
     uri: https://slack.com/api/rtm.start
   response:
-    body: {string: !!python/unicode '{"ok":true,"url":"wss:\/\/ms553.slack-msgs.com\/websocket\/dfgfdgfdg","team":{"domain":"test"}, "self":{"name":"mopidy-jukebox"}, "channels":[{"id":"mock_channel"}],"groups":[], "ims":[], "users":[]}'}
+    body: {string: !!python/unicode '{"ok":true,"url":"wss:\/\/ms553.slack-msgs.com\/websocket\/dfgfdgfdg","team":{"domain":"test"},
+        "self":{"name":"mopidy-jukebox"}, "channels":[{"id":"mock_channel"}],"groups":[],
+        "ims":[], "users":[]}'}
     headers:
       access-control-allow-origin: ['*']
       cache-control: ['private, no-cache, no-store, must-revalidate']
@@ -27,6 +29,41 @@ interactions:
       via: [1.1 5a823cd7a77f31b6fc2df20714f357d8.cloudfront.net (CloudFront)]
       x-accepted-oauth-scopes: ['rtm:stream,client']
       x-amz-cf-id: [GaEUQ36TPN-Z7uQGOd7L_Ei9shlJnQyDAzT8UEA8DWHK67qmn_BWtg==]
+      x-cache: [Miss from cloudfront]
+      x-content-type-options: [nosniff]
+      x-oauth-scopes: ['identify,read,post,client']
+      x-xss-protection: ['0']
+    status: {code: 200, message: OK}
+- request:
+    body: ''
+    headers:
+      Accept: ['*/*']
+      Accept-Encoding: ['gzip, deflate']
+      Connection: [keep-alive]
+      Content-Length: ['47']
+      Content-Type: [application/x-www-form-urlencoded]
+      User-Agent: [python-requests/2.9.1]
+    method: POST
+    uri: https://slack.com/api/rtm.start
+  response:
+    body: {string: !!python/unicode '{"ok":true,"url":"wss:\/\/ms553.slack-msgs.com\/websocket\/dfgfdgfdg","team":{"domain":"test"},
+        "self":{"name":"mopidy-jukebox"}, "channels":[{"id":"mock_channel"}],"groups":[],
+        "ims":[], "users":[]}'}
+    headers:
+      access-control-allow-origin: ['*']
+      cache-control: ['private, no-cache, no-store, must-revalidate']
+      connection: [keep-alive]
+      content-security-policy: [referrer no-referrer;]
+      content-type: [application/json; charset=utf-8]
+      date: ['Sun, 06 Mar 2016 22:11:32 GMT']
+      expires: ['Mon, 26 Jul 1997 05:00:00 GMT']
+      pragma: [no-cache]
+      server: [Apache]
+      strict-transport-security: [max-age=31536000; includeSubDomains; preload]
+      vary: [Accept-Encoding]
+      via: [1.1 eab02adc955326a719377e9de670ec78.cloudfront.net (CloudFront)]
+      x-accepted-oauth-scopes: ['rtm:stream,client']
+      x-amz-cf-id: [joKiCOE4uOSYjfXVcxgZLKCujxSlYZXn8qiUfEvYFo_ZwIMg_TytCA==]
       x-cache: [Miss from cloudfront]
       x-content-type-options: [nosniff]
       x-oauth-scopes: ['identify,read,post,client']

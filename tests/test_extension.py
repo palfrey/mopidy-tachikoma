@@ -22,8 +22,8 @@ def test_get_config_schema():
 	assert 'slack_token' in schema
 
 def decompress_response(response):
-	if 'content-encoding' in response['headers'] and response['headers']['content-encoding'] == "gzip":
-		body = zlib.decompress(response['body']['string'], 16 + zlib.MAX_WBITS).decode('utf8')
+	if 'content-encoding' in response['headers'] and response['headers']['content-encoding'] == ["gzip"]:
+		body = zlib.decompress(response['body']['string'], 16 + zlib.MAX_WBITS)
 		response['body']['string'] = body
 		del response['headers']['content-encoding']
 	return response
@@ -43,7 +43,7 @@ class WebSocketForTest(websocket.WebSocket):
 def patched_bot(func):
 	@wraps(func)
 	def func_wrapper(*args, **kwargs):
-		with vcr.use_cassette("tests/slack_responses.yaml", record_mode='once', filter_post_data_parameters=['token'], before_record_response=decompress_response):
+		with vcr.use_cassette("tests/slack_responses.yaml", record_mode='new_episodes', filter_post_data_parameters=['token'], before_record_response=decompress_response):
 			with mock.patch("slackclient._server.create_connection", return_value=WebSocketForTest()) as mock_connection:
 				print "calling with decorator", mock_connection
 				func(*args, **kwargs)
