@@ -64,15 +64,16 @@ class MockCore:
             return MockProxy()
     playback = MockPlayback()
 
-@patched_bot
-def test_gets_events():
+def make_frontend():
 	config = {"tachikoma": {"slack_token": "junk-token"}}
 	core = MockCore()
-	bot.TachikomaFrontend(config, core)
+	return bot.TachikomaFrontend(config, core)
 
 @patched_bot
-def test_gets_more_events():
-	config = {"tachikoma": {"slack_token": "junk-token"}}
-	core = MockCore()
-	frontend = bot.TachikomaFrontend(config, core)
+def test_can_connect():
+	make_frontend()
+
+@patched_bot
+def test_gets_events():
+	frontend = make_frontend()
 	frontend.doSlackLoop(None)
