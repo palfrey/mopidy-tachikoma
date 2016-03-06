@@ -1,4 +1,5 @@
 sudo: false
+dist: trusty
 
 language: python
 
@@ -7,10 +8,7 @@ python:
 
 addons:
   apt:
-    sources:
-      - debian-sid
     packages:
-      - libc-bin
       - python-gi
       - gir1.2-gstreamer-1.0
 
