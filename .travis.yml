@@ -7,6 +7,8 @@ python:
 
 addons:
   apt:
+    sources:
+      - debian-sid
     packages:
       - python-gi
       - gir1.2-gstreamer-1.0
