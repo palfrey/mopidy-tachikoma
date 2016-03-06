@@ -18,7 +18,7 @@ setup(
     author='Tom Parker',
     author_email='palfrey@tevp.net',
     description='Mopidy extension for talking to Slack',
-    long_description=open('README.rst').read(),
+    long_description=open('README.md').read(),
     packages=find_packages(exclude=['tests', 'tests.*']),
     zip_safe=False,
     include_package_data=True,
