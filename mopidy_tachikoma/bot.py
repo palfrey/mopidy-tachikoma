@@ -1,13 +1,15 @@
 from __future__ import unicode_literals
 
-import pykka
+import logging
 import thread
 import time
-from slackclient import SlackClient
-import logging
+
 from mopidy import core
+import pykka
+from slackclient import SlackClient
 
 logger = logging.getLogger(__name__)
+
 
 class TachikomaFrontend(pykka.ThreadingActor, core.CoreListener):
 	def __init__(self, config, core):
@@ -17,7 +19,7 @@ class TachikomaFrontend(pykka.ThreadingActor, core.CoreListener):
 		self.core = core
 		self.sc = SlackClient(self.slackToken)
 		if not self.sc.rtm_connect():
-			raise Exception, "Bad Slack token?"
+			raise Exception("Bad Slack token?")
 		thread.start_new_thread(self.doSlack, ())
 
 	def doSlack(self):
@@ -34,9 +36,9 @@ class TachikomaFrontend(pykka.ThreadingActor, core.CoreListener):
 			current_track = self.core.playback.get_current_track().get(3)
 			for item in self.sc.rtm_read():
 				if item[u"type"] != u"message":
-					continue # don't care
+					continue  # don't care
 				logger.info(item)
-				if current_track == None:
+				if current_track is None:
 					logger.debug("No current track")
 				elif last_track_told == current_track:
 					logger.debug("Already told them about that track")
@@ -50,9 +52,10 @@ class TachikomaFrontend(pykka.ThreadingActor, core.CoreListener):
 					else:
 						artists = ", ".join(artists[:-1]) + " and " + artists[-1]
 					msg = "Now playing *%s*" % current_track.name
-					if artists != None:
+					if artists is not None:
 						msg += " by *%s*" % artists
-					if current_track.album != None and current_track.album.name != None and current_track.album.name != "":
+					if current_track.album is not None and \
+						current_track.album.name is not None and current_track.album.name != "":
 						msg += " from *%s*" % current_track.album.name
 					self.sc.rtm_send_message(item[u"channel"], msg)
 					logger.debug("sent '%s' to channel with id %s" % (msg, item[u"channel"]))
