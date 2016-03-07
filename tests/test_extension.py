@@ -8,6 +8,7 @@ from mopidy_tachikoma import Extension
 
 logging.basicConfig(level=logging.DEBUG)
 
+
 def test_get_default_config():
 	ext = Extension()
 
@@ -48,7 +49,8 @@ def test_says_one_thing_per_channel():
 	song = MockTrack()
 	get_websocket().data = None  # make sure it's cleared
 	frontend.doSlackLoop(
-		{"mock_channel": song}, song, [{"type": "message", "channel": "mock_channel"}])
+		{"mock_channel": song}, song,
+		[{"type": "message", "channel": "mock_channel"}])
 	assert get_websocket().data is None  # same song, no info
 
 
@@ -58,7 +60,8 @@ def test_says_things_per_channel():
 	song = MockTrack()
 	get_websocket().data = "{}"  # make sure it's cleared
 	frontend.doSlackLoop(
-		{"mock_channel": song}, song, [{"type": "message", "channel": "mock_second_channel"}])
+		{"mock_channel": song}, song,
+		[{"type": "message", "channel": "mock_second_channel"}])
 	data = json.loads(get_websocket().data)
 	assert {
 		'channel': 'mock_second_channel',

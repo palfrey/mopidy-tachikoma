@@ -41,7 +41,8 @@ class TachikomaFrontend(pykka.ThreadingActor, core.CoreListener):
 			channel = item[u"channel"]
 			if current_track is None:
 				logger.debug("No current track")
-			elif last_track_told.has_key(channel) and last_track_told[channel] == current_track:
+			elif channel in last_track_told and \
+				last_track_told[channel] == current_track:
 				logger.debug("Already told them about that track")
 			else:
 				logger.debug("New track!")
