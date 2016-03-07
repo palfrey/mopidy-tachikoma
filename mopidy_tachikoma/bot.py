@@ -28,6 +28,7 @@ class TachikomaFrontend(pykka.ThreadingActor, core.CoreListener):
 		last_track_told = {}
 		while True:
 			items = self.sc.rtm_read()
+			logger.debug("info %r", items)
 			if items != []:
 				current_track = self.core.playback.get_current_track().get(3)
 				last_track_told = self.doSlackLoop(last_track_told, current_track, items)
@@ -46,7 +47,7 @@ class TachikomaFrontend(pykka.ThreadingActor, core.CoreListener):
 				logger.debug("Already told them about that track")
 			else:
 				logger.debug("New track!")
-				artists = [x.name for x in current_track.artists]
+				artists = ["*%s*" % x.name for x in current_track.artists]
 				if len(artists) == 0:
 					artists = None
 				elif len(artists) == 1:
@@ -55,7 +56,7 @@ class TachikomaFrontend(pykka.ThreadingActor, core.CoreListener):
 					artists = ", ".join(artists[:-1]) + " and " + artists[-1]
 				msg = "Now playing *%s*" % current_track.name
 				if artists is not None:
-					msg += " by *%s*" % artists
+					msg += " by %s" % artists
 				if current_track.album is not None and \
 					current_track.album.name is not None and current_track.album.name != "":
 					msg += " from *%s*" % current_track.album.name

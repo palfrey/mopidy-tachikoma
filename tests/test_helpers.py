@@ -66,6 +66,11 @@ def patched_bot(func):
 	return func_wrapper
 
 
+class MockArtist:
+	def __init__(self, name):
+		self.name = name
+
+
 class MockTrack:
 	artists = []
 	name = "foo"
