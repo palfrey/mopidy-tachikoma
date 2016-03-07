@@ -2,6 +2,7 @@ from __future__ import unicode_literals
 
 import json
 import logging
+import mock
 
 from test_helpers import MockTrack, get_websocket, make_frontend, patched_bot
 from mopidy_tachikoma import Extension
@@ -25,9 +26,24 @@ def test_get_config_schema():
 	assert 'slack_token' in schema
 
 
+class TestException(Exception):
+	pass
+
+
+def exit_while_loop(*args):
+	raise TestException
+
+
 @patched_bot
 def test_can_connect():
-	make_frontend()
+	with mock.patch("time.sleep") as mock_sleep:
+		mock_sleep.side_effect = exit_while_loop
+		frontend = make_frontend()
+		try:
+			frontend.doSlack()
+			raise Exception("No TestException!")
+		except TestException:
+			pass
 
 
 @patched_bot
