@@ -44,6 +44,7 @@ def test_gets_events():
 def test_says_one_thing_per_channel():
 	frontend = make_frontend()
 	song = MockTrack()
+	get_websocket().data = None  # make sure it's cleared
 	frontend.doSlackLoop(
 		song, song, [{"type": "message", "channel": "mock_channel"}])
 	assert get_websocket().data is None  # same song, no info
