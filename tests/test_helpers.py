@@ -61,8 +61,7 @@ def patched_bot(func):
 			_websocket = WebSocketForTest()
 			with mock.patch(
 				"slackclient._server.create_connection",
-				return_value=_websocket) as mock_connection:
-				print "calling with decorator", mock_connection
+				return_value=_websocket):
 				func(*args, **kwargs)
 	return func_wrapper
 
