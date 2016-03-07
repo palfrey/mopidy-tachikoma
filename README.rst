@@ -3,6 +3,8 @@ Mopidy-Tachikoma
 
 .. image:: https://travis-ci.org/palfrey/mopidy-tachikoma.svg?branch=master
     :target: https://travis-ci.org/palfrey/mopidy-tachikoma
+.. image:: https://coveralls.io/repos/github/palfrey/mopidy-tachikoma/badge.svg?branch=master
+    :target: https://coveralls.io/github/palfrey/mopidy-tachikoma?branch=master
 
 `Mopidy <http://mopidy.com>`_ extension for talking to `Slack <https://slack.com>`_
 
