@@ -27,39 +27,39 @@ class TachikomaFrontend(pykka.ThreadingActor, core.CoreListener):
 		logger.info(self.core.playback.get_current_track().get())
 		last_track_told = None
 		while True:
-			last_track_told = self.doSlackLoop(last_track_told)
+			items = self.sc.rtm_read()
+			if items != []:
+				current_track = self.core.playback.get_current_track().get(3)
+				last_track_told = self.doSlackLoop(last_track_told, current_track, items)
 			time.sleep(1)
 
-	def doSlackLoop(self, last_track_told):
-		items = self.sc.rtm_read()
-		if items != []:
-			current_track = self.core.playback.get_current_track().get(3)
-			for item in self.sc.rtm_read():
-				if item[u"type"] != u"message":
-					continue  # don't care
-				logger.info(item)
-				if current_track is None:
-					logger.debug("No current track")
-				elif last_track_told == current_track:
-					logger.debug("Already told them about that track")
+	def doSlackLoop(self, last_track_told, current_track, items):
+		for item in self.sc.rtm_read():
+			if item[u"type"] != u"message":
+				continue  # don't care
+			logger.info(item)
+			if current_track is None:
+				logger.debug("No current track")
+			elif last_track_told == current_track:
+				logger.debug("Already told them about that track")
+			else:
+				logger.debug("New track!")
+				artists = [x.name for x in current_track.artists]
+				if len(artists) == 0:
+					artists = None
+				elif len(artists) == 1:
+					artists = artists[0]
 				else:
-					logger.debug("New track!")
-					artists = [x.name for x in current_track.artists]
-					if len(artists) == 0:
-						artists = None
-					elif len(artists) == 1:
-						artists = artists[0]
-					else:
-						artists = ", ".join(artists[:-1]) + " and " + artists[-1]
-					msg = "Now playing *%s*" % current_track.name
-					if artists is not None:
-						msg += " by *%s*" % artists
-					if current_track.album is not None and \
-						current_track.album.name is not None and current_track.album.name != "":
-						msg += " from *%s*" % current_track.album.name
-					self.sc.rtm_send_message(item[u"channel"], msg)
-					logger.debug("sent '%s' to channel with id %s" % (msg, item[u"channel"]))
-					last_track_told = current_track
+					artists = ", ".join(artists[:-1]) + " and " + artists[-1]
+				msg = "Now playing *%s*" % current_track.name
+				if artists is not None:
+					msg += " by *%s*" % artists
+				if current_track.album is not None and \
+					current_track.album.name is not None and current_track.album.name != "":
+					msg += " from *%s*" % current_track.album.name
+				self.sc.rtm_send_message(item[u"channel"], msg)
+				logger.debug("sent '%s' to channel with id %s" % (msg, item[u"channel"]))
+				last_track_told = current_track
 		return last_track_told
 
 if __name__ == "__main__":

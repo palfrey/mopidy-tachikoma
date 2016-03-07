@@ -33,6 +33,7 @@ class WebSocketForTest(websocket.WebSocket):
 		self.sock = MockSock()
 		self._websocket = MockSock()
 		self.connected = True
+		self.data = None
 
 	def send(self, payload, opcode=None):
 		self.data = payload
@@ -66,18 +67,20 @@ def patched_bot(func):
 	return func_wrapper
 
 
+class MockTrack:
+	artists = []
+	name = "foo"
+
+	class MockAlbum:
+		name = "bar"
+	album = MockAlbum
+
+
 class MockCore:
 	class MockPlayback:
 		def get_current_track(self):
 			class MockProxy:
 				def get(self, timeout=None):
-					class MockTrack:
-						artists = []
-						name = "foo"
-
-						class MockAlbum:
-							name = "bar"
-						album = MockAlbum
 					return MockTrack()
 			return MockProxy()
 	playback = MockPlayback()
