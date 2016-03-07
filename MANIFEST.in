@@ -1,7 +1,7 @@
 include .travis.yml
 include LICENSE
 include MANIFEST.in
-include README.md
+include README.rst
 include mopidy_tachikoma/ext.conf
 include tox.ini
 
