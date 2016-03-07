@@ -39,7 +39,7 @@ class WebSocketForTest(websocket.WebSocket):
 		self.data = payload
 
 	def recv(self):
-		return '{"type":"message","channel":"mock_channel"}'
+		return ''
 
 _websocket = None
 

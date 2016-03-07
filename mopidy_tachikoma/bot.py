@@ -24,8 +24,8 @@ class TachikomaFrontend(pykka.ThreadingActor, core.CoreListener):
 
 	def doSlack(self):
 		logger.info("Tachikoma is listening to Slack")
-		logger.info(self.core.playback.get_current_track().get())
-		last_track_told = None
+		logger.info("current track %r", self.core.playback.get_current_track().get())
+		last_track_told = {}
 		while True:
 			items = self.sc.rtm_read()
 			if items != []:
@@ -34,13 +34,14 @@ class TachikomaFrontend(pykka.ThreadingActor, core.CoreListener):
 			time.sleep(1)
 
 	def doSlackLoop(self, last_track_told, current_track, items):
-		for item in self.sc.rtm_read():
+		for item in items:
 			if item[u"type"] != u"message":
 				continue  # don't care
 			logger.info(item)
+			channel = item[u"channel"]
 			if current_track is None:
 				logger.debug("No current track")
-			elif last_track_told == current_track:
+			elif last_track_told.has_key(channel) and last_track_told[channel] == current_track:
 				logger.debug("Already told them about that track")
 			else:
 				logger.debug("New track!")
@@ -57,9 +58,9 @@ class TachikomaFrontend(pykka.ThreadingActor, core.CoreListener):
 				if current_track.album is not None and \
 					current_track.album.name is not None and current_track.album.name != "":
 					msg += " from *%s*" % current_track.album.name
-				self.sc.rtm_send_message(item[u"channel"], msg)
-				logger.debug("sent '%s' to channel with id %s" % (msg, item[u"channel"]))
-				last_track_told = current_track
+				self.sc.rtm_send_message(channel, msg)
+				logger.debug("sent '%s' to channel with id %s" % (msg, channel))
+				last_track_told[channel] = current_track
 		return last_track_told
 
 if __name__ == "__main__":

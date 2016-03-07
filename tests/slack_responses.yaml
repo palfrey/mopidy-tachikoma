@@ -12,7 +12,7 @@ interactions:
     uri: https://slack.com/api/rtm.start
   response:
     body: {string: !!python/unicode '{"ok":true,"url":"wss:\/\/ms553.slack-msgs.com\/websocket\/dfgfdgfdg","team":{"domain":"test"},
-        "self":{"name":"mopidy-jukebox"}, "channels":[{"id":"mock_channel"}],"groups":[],
+        "self":{"name":"mopidy-jukebox"}, "channels":[{"id":"mock_channel"},{"id":"mock_second_channel"}],"groups":[],
         "ims":[], "users":[]}'}
     headers:
       access-control-allow-origin: ['*']
