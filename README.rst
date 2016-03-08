@@ -1,6 +1,8 @@
 Mopidy-Tachikoma
 ================
 
+.. image:: https://img.shields.io/pypi/v/mopidy-tachikoma.svg
+    :target: https://pypi.python.org/pypi/Mopidy-Tachikoma/
 .. image:: https://travis-ci.org/palfrey/mopidy-tachikoma.svg?branch=master
     :target: https://travis-ci.org/palfrey/mopidy-tachikoma
 .. image:: https://coveralls.io/repos/github/palfrey/mopidy-tachikoma/badge.svg?branch=master
