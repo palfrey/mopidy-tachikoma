@@ -8,3 +8,4 @@ MANIFEST
 build/
 dist/
 ENV/
+output.html

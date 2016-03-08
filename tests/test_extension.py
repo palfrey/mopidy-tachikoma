@@ -90,91 +90,81 @@ def test_on_connect_fail():
 				raise
 
 
-@patched_bot
-def test_gets_events():
-	frontend = make_frontend()
-	frontend.doSlackLoop(
-		{}, MockTrack(),
-		[{"type": "message", "channel": "mock_channel"}])
+def check_websocket(channel="mock_channel", text=""):
 	data = json.loads(get_websocket().data)
 	assert {
-		'channel': 'mock_channel',
-		'text': 'Now playing *foo* from *bar*',
+		'channel': channel,
+		'text': text,
 		'type': 'message'} == data
+
+
+test_message = {"type": "message", "channel": "mock_channel"}
+
+
+def check_with_artists(artists, text):
+	frontend = make_frontend()
+	track = MockTrack()
+	track.artists = [MockArtist(x) for x in artists]
+	frontend.doSlackLoop(
+		{}, track,
+		[test_message])
+	check_websocket(text=text)
+
+
+@patched_bot
+def test_gets_events():
+	check_with_artists([], 'Now playing *foo* from *bar*')
 
 
 @patched_bot
 def test_gets_events_with_an_artist():
-	frontend = make_frontend()
-	track = MockTrack()
-	track.artists = [MockArtist("Baz")]
-	frontend.doSlackLoop(
-		{}, track,
-		[{"type": "message", "channel": "mock_channel"}])
-	data = json.loads(get_websocket().data)
-	assert {
-		'channel': 'mock_channel',
-		'text': 'Now playing *foo* by *Baz* from *bar*',
-		'type': 'message'} == data
+	check_with_artists(["Baz"], 'Now playing *foo* by *Baz* from *bar*')
 
 
 @patched_bot
 def test_gets_events_with_multiple_artists():
+	check_with_artists(
+		["Baz", "Spam", "Eggs"],
+		'Now playing *foo* by *Baz*, *Spam* and *Eggs* from *bar*')
+
+
+def run_frontend(last_track_told, current_track, items):
 	frontend = make_frontend()
-	track = MockTrack()
-	track.artists = [MockArtist("Baz"), MockArtist("Spam"), MockArtist("Eggs")]
-	frontend.doSlackLoop(
-		{}, track,
-		[{"type": "message", "channel": "mock_channel"}])
-	data = json.loads(get_websocket().data)
-	assert {
-		'channel': 'mock_channel',
-		'text': 'Now playing *foo* by *Baz*, *Spam* and *Eggs* from *bar*',
-		'type': 'message'} == data
+	get_websocket().data = None  # make sure it's cleared
+	frontend.doSlackLoop(last_track_told, current_track, items)
 
 
 @patched_bot
 def test_says_one_thing_per_channel():
-	frontend = make_frontend()
 	song = MockTrack()
-	get_websocket().data = None  # make sure it's cleared
-	frontend.doSlackLoop(
+	run_frontend(
 		{"mock_channel": song}, song,
-		[{"type": "message", "channel": "mock_channel"}])
+		[test_message])
 	assert get_websocket().data is None  # same song, no info
 
 
 @patched_bot
 def test_does_nothing_on_non_messages():
-	frontend = make_frontend()
-	song = MockTrack()
-	get_websocket().data = None  # make sure it's cleared
-	frontend.doSlackLoop(
-		{}, song,
+	run_frontend(
+		{}, MockTrack(),
 		[{"type": "something_else"}])
 	assert get_websocket().data is None  # same song, no info
 
 
 @patched_bot
 def test_does_nothing_when_no_song():
-	frontend = make_frontend()
-	get_websocket().data = None  # make sure it's cleared
-	frontend.doSlackLoop(
+	run_frontend(
 		{"mock_channel": MockTrack()}, None,
-		[{"type": "message", "channel": "mock_channel"}])
+		[test_message])
 	assert get_websocket().data is None  # no song, no info
 
 
 @patched_bot
 def test_says_things_per_channel():
-	frontend = make_frontend()
 	song = MockTrack()
-	get_websocket().data = "{}"  # make sure it's cleared
-	frontend.doSlackLoop(
+	run_frontend(
 		{"mock_channel": song}, song,
 		[{"type": "message", "channel": "mock_second_channel"}])
-	data = json.loads(get_websocket().data)
-	assert {
-		'channel': 'mock_second_channel',
-		'text': 'Now playing *foo* from *bar*',
-		'type': 'message'} == data
+	check_websocket(
+		channel="mock_second_channel",
+		text='Now playing *foo* from *bar*')
