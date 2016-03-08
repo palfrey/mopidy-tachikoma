@@ -1,4 +1,4 @@
 #!/bin/bash
-virtualenv --system-site-packages ENV
+virtualenv ENV
 source ENV/bin/activate
 pip install --upgrade pip pip-tools

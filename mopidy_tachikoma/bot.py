@@ -4,14 +4,14 @@ import logging
 import thread
 import time
 
-from mopidy import core
+from mopidy.core.listener import CoreListener
 import pykka
 from slackclient import SlackClient
 
 logger = logging.getLogger(__name__)
 
 
-class TachikomaFrontend(pykka.ThreadingActor, core.CoreListener):
+class TachikomaFrontend(pykka.ThreadingActor, CoreListener):
 	def __init__(self, config, core):
 		super(TachikomaFrontend, self).__init__()
 		self.daemon = True
