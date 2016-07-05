@@ -147,8 +147,7 @@ def test_says_one_thing_per_channel():
 def test_does_nothing_on_non_messages():
 	run_frontend(
 		{}, MockTrack(),
-		[{"type": "something_else"},
-		 {"foo": "bar"}])
+		[{"type": "something_else"}, {"foo": "bar"}])
 	assert get_websocket().data is None  # same song, no info
 
 
