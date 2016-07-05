@@ -36,7 +36,7 @@ class TachikomaFrontend(pykka.ThreadingActor, CoreListener):
 
 	def doSlackLoop(self, last_track_told, current_track, items):
 		for item in items:
-			if item[u"type"] != u"message":
+			if u"type" not in item or item[u"type"] != u"message":
 				continue  # don't care
 			logger.info(item)
 			channel = item[u"channel"]
