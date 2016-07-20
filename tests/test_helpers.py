@@ -4,6 +4,7 @@ import zlib
 from functools import wraps
 
 import mock
+import pykka
 import vcr
 import websocket
 
@@ -80,17 +81,55 @@ class MockTrack:
 	album = MockAlbum
 
 
+class MockProxy:
+	def __init__(self, get_return):
+		self.get_return = get_return
+
+	def get(self, timeout=None):
+		return self.get_return.next()
+
+
+class MockPlayback:
+	def __init__(self, get_return):
+		self.get_return = get_return
+		self.proxy = MockProxy(self.get_return)
+
+	def get_current_track(self):
+		return self.proxy
+
+
 class MockCore:
-	class MockPlayback:
-		def get_current_track(self):
-			class MockProxy:
-				def get(self, timeout=None):
-					return MockTrack()
-			return MockProxy()
-	playback = MockPlayback()
+	def __init__(self, get_return):
+		self.playback = MockPlayback(get_return)
+
+
+def make_frontend_core(get_return):
+	config = {"tachikoma": {"slack_token": "junk-token"}}
+	core = MockCore(get_return)
+	return bot.TachikomaFrontend(config, core)
+
+
+def timeout_after_calls(count):
+	class track_iter:
+		def __init__(self, count):
+			self.count = count
+			self.i = 0
+
+		def __iter__(self):
+			return self
+
+		def next(self):
+			if self.i == self.count:
+				raise pykka.Timeout
+			else:
+				self.i += 1
+				return MockTrack()
+	return track_iter(count)
 
 
 def make_frontend():
-	config = {"tachikoma": {"slack_token": "junk-token"}}
-	core = MockCore()
-	return bot.TachikomaFrontend(config, core)
+	return make_frontend_core(timeout_after_calls(1000))
+
+
+def make_timeout_frontend(count):
+	return make_frontend_core(timeout_after_calls(count))

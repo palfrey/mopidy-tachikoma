@@ -5,7 +5,8 @@ import logging
 import mock
 
 from test_helpers import \
-	MockArtist, MockTrack, get_websocket, make_frontend, patched_bot
+	MockArtist, MockTrack, get_websocket, \
+	make_frontend, make_timeout_frontend, patched_bot
 from mopidy_tachikoma import Extension
 
 logging.basicConfig(level=logging.DEBUG)
@@ -168,3 +169,29 @@ def test_says_things_per_channel():
 	check_websocket(
 		channel="mock_second_channel",
 		text='Now playing *foo* from *bar*')
+
+
+@patched_bot
+def test_copes_with_track_timeout_on_init():
+	frontend = make_timeout_frontend(0)
+	with mock.patch("time.sleep") as mock_sleep:
+		mock_sleep.side_effect = good_exit_while_loop
+		try:
+			frontend.doSlack()
+			raise Exception("No TestException!")
+		except TestException:
+			pass
+
+
+@patched_bot
+def test_copes_with_track_timeout_in_loop():
+	frontend = make_timeout_frontend(1)
+	with mock.patch("time.sleep") as mock_sleep:
+		mock_sleep.side_effect = good_exit_while_loop
+		with mock.patch("tests.test_helpers.WebSocketForTest.recv") as mock_post:
+			mock_post.return_value = "{\"type\":\"foo\"}"
+			try:
+				frontend.doSlack()
+				raise Exception("No TestException!")
+			except TestException:
+				pass

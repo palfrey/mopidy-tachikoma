@@ -24,13 +24,21 @@ class TachikomaFrontend(pykka.ThreadingActor, CoreListener):
 
 	def doSlack(self):
 		logger.info("Tachikoma is listening to Slack")
-		logger.info("current track %r", self.core.playback.get_current_track().get())
+		try:
+			logger.info(
+				"current track %r", self.core.playback.get_current_track().get())
+		except pykka.Timeout:
+			logger.warning("Couldn't get current track")
 		last_track_told = {}
 		while True:
 			items = self.sc.rtm_read()
 			logger.debug("info %r", items)
 			if items != []:
-				current_track = self.core.playback.get_current_track().get(3)
+				try:
+					current_track = self.core.playback.get_current_track().get(3)
+				except pykka.Timeout, e:
+					logger.warning("Failure to get current track", e)
+					current_track = None
 				last_track_told = self.doSlackLoop(last_track_told, current_track, items)
 			time.sleep(1)
 
