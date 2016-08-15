@@ -31,7 +31,12 @@ class TachikomaFrontend(pykka.ThreadingActor, CoreListener):
 			logger.warning("Couldn't get current track")
 		last_track_told = {}
 		while True:
-			items = self.sc.rtm_read()
+			try:
+				items = self.sc.rtm_read()
+			except Exception, e:
+				logger.info("Exception from Slack: %r", e)
+				self.sc = SlackClient(self.slackToken)
+				time.sleep(5)
 			logger.debug("info %r", items)
 			if items != []:
 				try:

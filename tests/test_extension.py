@@ -195,3 +195,16 @@ def test_copes_with_track_timeout_in_loop():
 				raise Exception("No TestException!")
 			except TestException:
 				pass
+
+
+@patched_bot
+def test_copes_with_slack_timeout_in_loop():
+	frontend = make_timeout_frontend(1)
+	with mock.patch("time.sleep") as mock_sleep:
+		mock_sleep.side_effect = good_exit_while_loop
+		with mock.patch("tests.test_helpers.WebSocketForTest.recv") as mock_post:
+			try:
+				mock_post.side_effect = Exception('Boom!')
+				frontend.doSlack()
+			except TestException:
+				pass
