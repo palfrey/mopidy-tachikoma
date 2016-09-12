@@ -7,19 +7,23 @@ import time
 from mopidy.core.listener import CoreListener
 import pykka
 from slackclient import SlackClient
+import websocket
 
 logger = logging.getLogger(__name__)
 
 
 class TachikomaFrontend(pykka.ThreadingActor, CoreListener):
+	def new_slack_client(self):
+		self.sc = SlackClient(self.slackToken)
+		if not self.sc.rtm_connect():
+			raise Exception("Bad Slack token?")
+
 	def __init__(self, config, core):
 		super(TachikomaFrontend, self).__init__()
 		self.daemon = True
 		self.slackToken = config['tachikoma']['slack_token'],
 		self.core = core
-		self.sc = SlackClient(self.slackToken)
-		if not self.sc.rtm_connect():
-			raise Exception("Bad Slack token?")
+		self.new_slack_client()
 		thread.start_new_thread(self.doSlack, ())
 
 	def doSlack(self):
@@ -35,8 +39,9 @@ class TachikomaFrontend(pykka.ThreadingActor, CoreListener):
 				items = self.sc.rtm_read()
 			except Exception, e:
 				logger.info("Exception from Slack: %r", e)
-				self.sc = SlackClient(self.slackToken)
-				time.sleep(5)
+				time.sleep(1)
+				self.new_slack_client()
+				continue
 			logger.debug("info %r", items)
 			if items != []:
 				try:

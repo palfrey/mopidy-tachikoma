@@ -1,6 +1,6 @@
 interactions:
 - request:
-    body: ''
+    body: !!python/unicode
     headers:
       Accept: ['*/*']
       Accept-Encoding: ['gzip, deflate']
@@ -35,7 +35,7 @@ interactions:
       x-xss-protection: ['0']
     status: {code: 200, message: OK}
 - request:
-    body: ''
+    body: !!python/unicode
     headers:
       Accept: ['*/*']
       Accept-Encoding: ['gzip, deflate']
@@ -67,6 +67,310 @@ interactions:
       x-cache: [Miss from cloudfront]
       x-content-type-options: [nosniff]
       x-oauth-scopes: ['identify,read,post,client']
+      x-xss-protection: ['0']
+    status: {code: 200, message: OK}
+- request:
+    body: !!python/unicode
+    headers:
+      Accept: ['*/*']
+      Accept-Encoding: ['gzip, deflate']
+      Connection: [keep-alive]
+      Content-Length: ['47']
+      Content-Type: [application/x-www-form-urlencoded]
+      User-Agent: [python-requests/2.11.1]
+    method: POST
+    uri: https://slack.com/api/rtm.start
+  response:
+    body: {string: !!python/unicode '{"ok":true,"url":"wss:\/\/ms553.slack-msgs.com\/websocket\/dfgfdgfdg","team":{"domain":"test"},
+        "self":{"name":"mopidy-jukebox"}, "channels":[{"id":"mock_channel"}],"groups":[],
+        "ims":[], "users":[]}'}
+    headers:
+      access-control-allow-origin: ['*']
+      cache-control: ['private, no-cache, no-store, must-revalidate']
+      connection: [keep-alive]
+      content-length: ['17719']
+      content-security-policy: [referrer no-referrer;]
+      content-type: [application/json; charset=utf-8]
+      date: ['Mon, 12 Sep 2016 14:19:28 GMT']
+      expires: ['Mon, 26 Jul 1997 05:00:00 GMT']
+      pragma: [no-cache]
+      server: [Apache]
+      strict-transport-security: [max-age=31536000; includeSubDomains; preload]
+      vary: [Accept-Encoding]
+      via: [1.1 67a64a0b6421858c229724725fd37688.cloudfront.net (CloudFront)]
+      x-accepted-oauth-scopes: ['rtm:stream,client']
+      x-amz-cf-id: [ElnWppsOD_zT2hXkVWKp9YU5FhXzx9VFjf5lg3SZeR3_U5WP6tLqlg==]
+      x-cache: [Miss from cloudfront]
+      x-content-type-options: [nosniff]
+      x-oauth-scopes: ['identify,read,post,client,apps']
+      x-slack-backend: [h]
+      x-slack-req-id: [150e8196-e5bf-40ba-bb53-35a12c9cd848]
+      x-xss-protection: ['0']
+    status: {code: 200, message: OK}
+- request:
+    body: !!python/unicode
+    headers:
+      Accept: ['*/*']
+      Accept-Encoding: ['gzip, deflate']
+      Connection: [keep-alive]
+      Content-Length: ['47']
+      Content-Type: [application/x-www-form-urlencoded]
+      User-Agent: [python-requests/2.11.1]
+    method: POST
+    uri: https://slack.com/api/rtm.start
+  response:
+    body: {string: !!python/unicode '{"ok":true,"url":"wss:\/\/ms553.slack-msgs.com\/websocket\/dfgfdgfdg","team":{"domain":"test"},
+        "self":{"name":"mopidy-jukebox"}, "channels":[{"id":"mock_channel"}],"groups":[],
+        "ims":[], "users":[]}'}
+    headers:
+      access-control-allow-origin: ['*']
+      cache-control: ['private, no-cache, no-store, must-revalidate']
+      connection: [keep-alive]
+      content-length: ['17723']
+      content-security-policy: [referrer no-referrer;]
+      content-type: [application/json; charset=utf-8]
+      date: ['Mon, 12 Sep 2016 14:19:29 GMT']
+      expires: ['Mon, 26 Jul 1997 05:00:00 GMT']
+      pragma: [no-cache]
+      server: [Apache]
+      strict-transport-security: [max-age=31536000; includeSubDomains; preload]
+      vary: [Accept-Encoding]
+      via: [1.1 4dbdc57755819d1a0ec1defc2630d677.cloudfront.net (CloudFront)]
+      x-accepted-oauth-scopes: ['rtm:stream,client']
+      x-amz-cf-id: [geCKJrH0jFBck6dnSXfG6ZQYjt-wPsN_mYM7tLlqMRgJJovoBDbDEw==]
+      x-cache: [Miss from cloudfront]
+      x-content-type-options: [nosniff]
+      x-oauth-scopes: ['identify,read,post,client,apps']
+      x-slack-backend: [h]
+      x-slack-req-id: [6850b999-6609-40f2-9b80-286e57d16086]
+      x-xss-protection: ['0']
+    status: {code: 200, message: OK}
+- request:
+    body: !!python/unicode
+    headers:
+      Accept: ['*/*']
+      Accept-Encoding: ['gzip, deflate']
+      Connection: [keep-alive]
+      Content-Length: ['47']
+      Content-Type: [application/x-www-form-urlencoded]
+      User-Agent: [python-requests/2.11.1]
+    method: POST
+    uri: https://slack.com/api/rtm.start
+  response:
+    body: {string: !!python/unicode '{"ok":true,"url":"wss:\/\/ms553.slack-msgs.com\/websocket\/dfgfdgfdg","team":{"domain":"test"},
+        "self":{"name":"mopidy-jukebox"}, "channels":[{"id":"mock_channel"}],"groups":[],
+        "ims":[], "users":[]}'}
+    headers:
+      access-control-allow-origin: ['*']
+      cache-control: ['private, no-cache, no-store, must-revalidate']
+      connection: [keep-alive]
+      content-length: ['17717']
+      content-security-policy: [referrer no-referrer;]
+      content-type: [application/json; charset=utf-8]
+      date: ['Mon, 12 Sep 2016 14:19:29 GMT']
+      expires: ['Mon, 26 Jul 1997 05:00:00 GMT']
+      pragma: [no-cache]
+      server: [Apache]
+      strict-transport-security: [max-age=31536000; includeSubDomains; preload]
+      vary: [Accept-Encoding]
+      via: [1.1 3eebab739de5f3b3016088352ebea37f.cloudfront.net (CloudFront)]
+      x-accepted-oauth-scopes: ['rtm:stream,client']
+      x-amz-cf-id: [HUtcxVo6dCzmGerfGT77Qef8cLa1TAfH_AZAv-b6hyEV1lQKaKbJtg==]
+      x-cache: [Miss from cloudfront]
+      x-content-type-options: [nosniff]
+      x-oauth-scopes: ['identify,read,post,client,apps']
+      x-slack-backend: [h]
+      x-slack-req-id: [4b84b326-9af8-4b40-b98c-04f7dd08c5ad]
+      x-xss-protection: ['0']
+    status: {code: 200, message: OK}
+- request:
+    body: !!python/unicode
+    headers:
+      Accept: ['*/*']
+      Accept-Encoding: ['gzip, deflate']
+      Connection: [keep-alive]
+      Content-Length: ['47']
+      Content-Type: [application/x-www-form-urlencoded]
+      User-Agent: [python-requests/2.11.1]
+    method: POST
+    uri: https://slack.com/api/rtm.start
+  response:
+    body: {string: !!python/unicode '{"ok":true,"url":"wss:\/\/ms553.slack-msgs.com\/websocket\/dfgfdgfdg","team":{"domain":"test"},
+        "self":{"name":"mopidy-jukebox"}, "channels":[{"id":"mock_channel"}],"groups":[],
+        "ims":[], "users":[]}'}
+    headers:
+      access-control-allow-origin: ['*']
+      cache-control: ['private, no-cache, no-store, must-revalidate']
+      connection: [keep-alive]
+      content-length: ['17722']
+      content-security-policy: [referrer no-referrer;]
+      content-type: [application/json; charset=utf-8]
+      date: ['Mon, 12 Sep 2016 14:19:29 GMT']
+      expires: ['Mon, 26 Jul 1997 05:00:00 GMT']
+      pragma: [no-cache]
+      server: [Apache]
+      strict-transport-security: [max-age=31536000; includeSubDomains; preload]
+      vary: [Accept-Encoding]
+      via: [1.1 67a64a0b6421858c229724725fd37688.cloudfront.net (CloudFront)]
+      x-accepted-oauth-scopes: ['rtm:stream,client']
+      x-amz-cf-id: [aUrikkIDMitUV3c6T3y2qwtsNMHZeblZs3j-ElECTKLbybbaiIyYEw==]
+      x-cache: [Miss from cloudfront]
+      x-content-type-options: [nosniff]
+      x-oauth-scopes: ['identify,read,post,client,apps']
+      x-slack-backend: [h]
+      x-slack-req-id: [0a913ed2-4214-4611-81ab-8b1bfbf05481]
+      x-xss-protection: ['0']
+    status: {code: 200, message: OK}
+- request:
+    body: !!python/unicode
+    headers:
+      Accept: ['*/*']
+      Accept-Encoding: ['gzip, deflate']
+      Connection: [keep-alive]
+      Content-Length: ['47']
+      Content-Type: [application/x-www-form-urlencoded]
+      User-Agent: [python-requests/2.11.1]
+    method: POST
+    uri: https://slack.com/api/rtm.start
+  response:
+    body: {string: !!python/unicode '{"ok":true,"url":"wss:\/\/ms553.slack-msgs.com\/websocket\/dfgfdgfdg","team":{"domain":"test"},
+        "self":{"name":"mopidy-jukebox"}, "channels":[{"id":"mock_channel"}],"groups":[],
+        "ims":[], "users":[]}'}
+    headers:
+      access-control-allow-origin: ['*']
+      cache-control: ['private, no-cache, no-store, must-revalidate']
+      connection: [keep-alive]
+      content-length: ['17699']
+      content-security-policy: [referrer no-referrer;]
+      content-type: [application/json; charset=utf-8]
+      date: ['Mon, 12 Sep 2016 14:19:29 GMT']
+      expires: ['Mon, 26 Jul 1997 05:00:00 GMT']
+      pragma: [no-cache]
+      server: [Apache]
+      strict-transport-security: [max-age=31536000; includeSubDomains; preload]
+      vary: [Accept-Encoding]
+      via: [1.1 c57cf5359c180229d3f10bed999a6106.cloudfront.net (CloudFront)]
+      x-accepted-oauth-scopes: ['rtm:stream,client']
+      x-amz-cf-id: [iWZiFnOxObcRq78lZArDZvVyynuOUzY9lGdPFXel20E9n_eqab7-Fw==]
+      x-cache: [Miss from cloudfront]
+      x-content-type-options: [nosniff]
+      x-oauth-scopes: ['identify,read,post,client,apps']
+      x-slack-backend: [h]
+      x-slack-req-id: [10f98d66-e7ce-4dc4-b7c1-e58240df6668]
+      x-xss-protection: ['0']
+    status: {code: 200, message: OK}
+- request:
+    body: !!python/unicode
+    headers:
+      Accept: ['*/*']
+      Accept-Encoding: ['gzip, deflate']
+      Connection: [keep-alive]
+      Content-Length: ['47']
+      Content-Type: [application/x-www-form-urlencoded]
+      User-Agent: [python-requests/2.11.1]
+    method: POST
+    uri: https://slack.com/api/rtm.start
+  response:
+    body: {string: !!python/unicode '{"ok":true,"url":"wss:\/\/ms553.slack-msgs.com\/websocket\/dfgfdgfdg","team":{"domain":"test"},
+        "self":{"name":"mopidy-jukebox"}, "channels":[{"id":"mock_channel"}],"groups":[],
+        "ims":[], "users":[]}'}
+    headers:
+      access-control-allow-origin: ['*']
+      cache-control: ['private, no-cache, no-store, must-revalidate']
+      connection: [keep-alive]
+      content-length: ['17716']
+      content-security-policy: [referrer no-referrer;]
+      content-type: [application/json; charset=utf-8]
+      date: ['Mon, 12 Sep 2016 14:19:29 GMT']
+      expires: ['Mon, 26 Jul 1997 05:00:00 GMT']
+      pragma: [no-cache]
+      server: [Apache]
+      strict-transport-security: [max-age=31536000; includeSubDomains; preload]
+      vary: [Accept-Encoding]
+      via: [1.1 95a4581bed116b6338fc42595fee6f43.cloudfront.net (CloudFront)]
+      x-accepted-oauth-scopes: ['rtm:stream,client']
+      x-amz-cf-id: [8QaLfvMXfGVrPlEyQo41FEtN_SKDj5d9BuRDV_UePjvZMmhX8fSvrA==]
+      x-cache: [Miss from cloudfront]
+      x-content-type-options: [nosniff]
+      x-oauth-scopes: ['identify,read,post,client,apps']
+      x-slack-backend: [h]
+      x-slack-req-id: [17721d48-6ea1-4891-89ba-68acc1bf7679]
+      x-xss-protection: ['0']
+    status: {code: 200, message: OK}
+- request:
+    body: !!python/unicode
+    headers:
+      Accept: ['*/*']
+      Accept-Encoding: ['gzip, deflate']
+      Connection: [keep-alive]
+      Content-Length: ['47']
+      Content-Type: [application/x-www-form-urlencoded]
+      User-Agent: [python-requests/2.11.1]
+    method: POST
+    uri: https://slack.com/api/rtm.start
+  response:
+    body: {string: !!python/unicode '{"ok":true,"url":"wss:\/\/ms553.slack-msgs.com\/websocket\/dfgfdgfdg","team":{"domain":"test"},
+        "self":{"name":"mopidy-jukebox"}, "channels":[{"id":"mock_channel"}],"groups":[],
+        "ims":[], "users":[]}'}
+    headers:
+      access-control-allow-origin: ['*']
+      cache-control: ['private, no-cache, no-store, must-revalidate']
+      connection: [keep-alive]
+      content-length: ['17716']
+      content-security-policy: [referrer no-referrer;]
+      content-type: [application/json; charset=utf-8]
+      date: ['Mon, 12 Sep 2016 14:19:29 GMT']
+      expires: ['Mon, 26 Jul 1997 05:00:00 GMT']
+      pragma: [no-cache]
+      server: [Apache]
+      strict-transport-security: [max-age=31536000; includeSubDomains; preload]
+      vary: [Accept-Encoding]
+      via: [1.1 95a4581bed116b6338fc42595fee6f43.cloudfront.net (CloudFront)]
+      x-accepted-oauth-scopes: ['rtm:stream,client']
+      x-amz-cf-id: [8QaLfvMXfGVrPlEyQo41FEtN_SKDj5d9BuRDV_UePjvZMmhX8fSvrA==]
+      x-cache: [Miss from cloudfront]
+      x-content-type-options: [nosniff]
+      x-oauth-scopes: ['identify,read,post,client,apps']
+      x-slack-backend: [h]
+      x-slack-req-id: [17721d48-6ea1-4891-89ba-68acc1bf7679]
+      x-xss-protection: ['0']
+    status: {code: 200, message: OK}
+- request:
+    body: !!python/unicode
+    headers:
+      Accept: ['*/*']
+      Accept-Encoding: ['gzip, deflate']
+      Connection: [keep-alive]
+      Content-Length: ['47']
+      Content-Type: [application/x-www-form-urlencoded]
+      User-Agent: [python-requests/2.11.1]
+    method: POST
+    uri: https://slack.com/api/rtm.start
+  response:
+    body: {string: !!python/unicode '{"ok":true,"url":"wss:\/\/ms553.slack-msgs.com\/websocket\/dfgfdgfdg","team":{"domain":"test"},
+        "self":{"name":"mopidy-jukebox"}, "channels":[{"id":"mock_channel"}],"groups":[],
+        "ims":[], "users":[]}'}
+    headers:
+      access-control-allow-origin: ['*']
+      cache-control: ['private, no-cache, no-store, must-revalidate']
+      connection: [keep-alive]
+      content-length: ['17716']
+      content-security-policy: [referrer no-referrer;]
+      content-type: [application/json; charset=utf-8]
+      date: ['Mon, 12 Sep 2016 14:19:29 GMT']
+      expires: ['Mon, 26 Jul 1997 05:00:00 GMT']
+      pragma: [no-cache]
+      server: [Apache]
+      strict-transport-security: [max-age=31536000; includeSubDomains; preload]
+      vary: [Accept-Encoding]
+      via: [1.1 95a4581bed116b6338fc42595fee6f43.cloudfront.net (CloudFront)]
+      x-accepted-oauth-scopes: ['rtm:stream,client']
+      x-amz-cf-id: [8QaLfvMXfGVrPlEyQo41FEtN_SKDj5d9BuRDV_UePjvZMmhX8fSvrA==]
+      x-cache: [Miss from cloudfront]
+      x-content-type-options: [nosniff]
+      x-oauth-scopes: ['identify,read,post,client,apps']
+      x-slack-backend: [h]
+      x-slack-req-id: [17721d48-6ea1-4891-89ba-68acc1bf7679]
       x-xss-protection: ['0']
     status: {code: 200, message: OK}
 version: 1

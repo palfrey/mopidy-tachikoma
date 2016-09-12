@@ -55,7 +55,7 @@ def patched_bot(func):
 	def func_wrapper(*args, **kwargs):
 		with vcr.use_cassette(
 			"tests/slack_responses.yaml",
-			record_mode='new_episodes',
+			record_mode='none',
 			filter_post_data_parameters=['token'],
 			before_record_response=decompress_response):
 			global _websocket
