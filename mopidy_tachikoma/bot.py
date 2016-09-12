@@ -7,7 +7,6 @@ import time
 from mopidy.core.listener import CoreListener
 import pykka
 from slackclient import SlackClient
-import websocket
 
 logger = logging.getLogger(__name__)
 
@@ -17,6 +16,7 @@ class TachikomaFrontend(pykka.ThreadingActor, CoreListener):
 		self.sc = SlackClient(self.slackToken)
 		if not self.sc.rtm_connect():
 			raise Exception("Bad Slack token?")
+		logger.info("New Slack client started")
 
 	def __init__(self, config, core):
 		super(TachikomaFrontend, self).__init__()
@@ -25,6 +25,25 @@ class TachikomaFrontend(pykka.ThreadingActor, CoreListener):
 		self.core = core
 		self.new_slack_client()
 		thread.start_new_thread(self.doSlack, ())
+
+	def doSlackRead(self, last_track_told):
+		try:
+			items = self.sc.rtm_read()
+		except Exception, e:
+			logger.info("Exception from Slack: %r", e)
+			time.sleep(1)
+			self.new_slack_client()
+			return last_track_told
+		logger.debug("info %r", items)
+		if items != []:
+			try:
+				current_track = self.core.playback.get_current_track().get(3)
+			except pykka.Timeout, e:
+				logger.warning("Failure to get current track", e)
+				current_track = None
+			return self.doSlackLoop(last_track_told, current_track, items)
+		else:
+			return last_track_told
 
 	def doSlack(self):
 		logger.info("Tachikoma is listening to Slack")
@@ -35,21 +54,7 @@ class TachikomaFrontend(pykka.ThreadingActor, CoreListener):
 			logger.warning("Couldn't get current track")
 		last_track_told = {}
 		while True:
-			try:
-				items = self.sc.rtm_read()
-			except Exception, e:
-				logger.info("Exception from Slack: %r", e)
-				time.sleep(1)
-				self.new_slack_client()
-				continue
-			logger.debug("info %r", items)
-			if items != []:
-				try:
-					current_track = self.core.playback.get_current_track().get(3)
-				except pykka.Timeout, e:
-					logger.warning("Failure to get current track", e)
-					current_track = None
-				last_track_told = self.doSlackLoop(last_track_told, current_track, items)
+			last_track_told = self.doSlackRead(last_track_told)
 			time.sleep(1)
 
 	def doSlackLoop(self, last_track_told, current_track, items):

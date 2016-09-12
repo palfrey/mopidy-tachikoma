@@ -373,4 +373,68 @@ interactions:
       x-slack-req-id: [17721d48-6ea1-4891-89ba-68acc1bf7679]
       x-xss-protection: ['0']
     status: {code: 200, message: OK}
+- request:
+    body: !!python/unicode
+    headers:
+      Accept: ['*/*']
+      Accept-Encoding: ['gzip, deflate']
+      Connection: [keep-alive]
+      Content-Length: ['16']
+      Content-Type: [application/x-www-form-urlencoded]
+      User-Agent: [python-requests/2.11.1]
+    method: POST
+    uri: https://slack.com/api/rtm.start
+  response:
+    body: {string: !!python/unicode '{"ok":true,"url":"wss:\/\/ms553.slack-msgs.com\/websocket\/dfgfdgfdg","team":{"domain":"test"},
+        "self":{"name":"mopidy-jukebox"}, "channels":[{"id":"mock_channel"}],"groups":[],
+        "ims":[], "users":[]}'}
+    headers:
+      access-control-allow-origin: ['*']
+      connection: [keep-alive]
+      content-length: ['17716']
+      content-security-policy: [referrer no-referrer;]
+      content-type: [application/json; charset=utf-8]
+      date: ['Mon, 12 Sep 2016 14:47:53 GMT']
+      server: [Apache]
+      strict-transport-security: [max-age=31536000; includeSubDomains; preload]
+      vary: [Accept-Encoding]
+      via: [1.1 22d1048cb75c81d8e25a9b2b49d5d6ab.cloudfront.net (CloudFront)]
+      x-amz-cf-id: [8WGrPt3kwhMAzM6MCGU0KbbQ-WIDUbbsDfa8TiScii2HtY4WiLffGg==]
+      x-cache: [Miss from cloudfront]
+      x-content-type-options: [nosniff]
+      x-slack-backend: [h]
+      x-slack-req-id: [657d38df-cb33-4282-bb6e-4950f354495d]
+      x-xss-protection: ['0']
+    status: {code: 200, message: OK}
+- request:
+    body: !!python/unicode
+    headers:
+      Accept: ['*/*']
+      Accept-Encoding: ['gzip, deflate']
+      Connection: [keep-alive]
+      Content-Length: ['16']
+      Content-Type: [application/x-www-form-urlencoded]
+      User-Agent: [python-requests/2.11.1]
+    method: POST
+    uri: https://slack.com/api/rtm.start
+  response:
+    body: {string: !!python/unicode '{"ok":false,"error":"invalid_auth"}'}
+    headers:
+      access-control-allow-origin: ['*']
+      connection: [keep-alive]
+      content-length: ['55']
+      content-security-policy: [referrer no-referrer;]
+      content-type: [application/json; charset=utf-8]
+      date: ['Mon, 12 Sep 2016 14:47:53 GMT']
+      server: [Apache]
+      strict-transport-security: [max-age=31536000; includeSubDomains; preload]
+      vary: [Accept-Encoding]
+      via: [1.1 e66a15cf6c7b01b2d613f4b2fc6c4f25.cloudfront.net (CloudFront)]
+      x-amz-cf-id: [QPU-JJ-KtQRCFPTw6343gFhcYlrnw5sWsKvBj0ybRo0O3pcysGWFLQ==]
+      x-cache: [Miss from cloudfront]
+      x-content-type-options: [nosniff]
+      x-slack-backend: [h]
+      x-slack-req-id: [546621d3-9ee0-41bf-9436-3eff30c3f034]
+      x-xss-protection: ['0']
+    status: {code: 200, message: OK}
 version: 1

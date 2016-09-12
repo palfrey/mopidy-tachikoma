@@ -7,8 +7,8 @@ import mock
 from test_helpers import \
 	MockArtist, MockTrack, get_websocket, \
 	make_frontend, make_timeout_frontend, patched_bot
-from mopidy_tachikoma import Extension
 import websocket
+from mopidy_tachikoma import Extension
 
 logging.basicConfig(level=logging.DEBUG)
 
@@ -52,14 +52,8 @@ def bad_exit_while_loop(*args):
 
 @patched_bot
 def test_can_connect():
-	with mock.patch("time.sleep") as mock_sleep:
-		mock_sleep.side_effect = good_exit_while_loop
-		frontend = make_frontend()
-		try:
-			frontend.doSlack()
-			raise Exception("No TestException!")
-		except TestException:
-			pass
+	frontend = make_frontend()
+	frontend.doSlackRead({})
 
 
 @patched_bot
@@ -201,24 +195,12 @@ def test_copes_with_track_timeout_in_loop():
 @patched_bot
 def test_copes_with_slack_timeout_in_loop():
 	frontend = make_timeout_frontend(1)
-	with mock.patch("time.sleep") as mock_sleep:
-		mock_sleep.side_effect = good_exit_while_loop
-		with mock.patch("tests.test_helpers.WebSocketForTest.recv") as mock_post:
-			try:
-				mock_post.side_effect = Exception('Boom!')
-				frontend.doSlack()
-			except TestException:
-				pass
+	frontend.doSlackRead({})
 
 
 @patched_bot
 def test_copes_with_slack_disconnect():
 	frontend = make_timeout_frontend(1)
-	with mock.patch("time.sleep") as mock_sleep:
-		mock_sleep.side_effect = good_exit_while_loop
-		with mock.patch("tests.test_helpers.WebSocketForTest.recv") as mock_post:
-			try:
-				mock_post.side_effect = websocket.WebSocketConnectionClosedException()
-				frontend.doSlack()
-			except TestException:
-				pass
+	with mock.patch("tests.test_helpers.WebSocketForTest.recv") as mock_post:
+		mock_post.side_effect = websocket.WebSocketConnectionClosedException()
+		frontend.doSlackRead({})
