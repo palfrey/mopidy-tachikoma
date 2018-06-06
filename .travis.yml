@@ -9,8 +9,8 @@ virtualenv:
 
 before_install:
  - pyenv versions
- - pyenv install 2.7.9 # Tornado needs at least 2.7.9, and Travis default is 2.7.6
- - pyenv global 2.7.9
+ - pyenv global 2.7 # Tornado needs at least 2.7.9, and Travis default is 2.7.6, but it's got 2.7.14 available
+ - python -V
 
 addons:
   apt:
@@ -19,7 +19,6 @@ addons:
     - python-gi
     - gir1.2-gstreamer-1.0
     - gir1.2-gst-plugins-base-1.0
-
 
 cache:
   - pip
