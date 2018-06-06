@@ -1,18 +1,24 @@
-sudo: true
 dist: trusty
 
 language: python
-
 python:
-  - "2.7_with_system_site_packages"
+  - "2.7"
+
+virtualenv:
+  system_site_packages: true
+
+addons:
+  apt:
+    update: true
+    packages:
+    - python2.7 # Tornado needs at least 2.7.9, and Travis default is 2.7.6
+    - python-gi
+    - gir1.2-gstreamer-1.0
+    - gir1.2-gst-plugins-base-1.0
 
 cache:
   - pip
   - apt
-
-before_install:
-  - sudo apt-get -qq update
-  - sudo apt-get install -y python-gi gir1.2-gstreamer-1.0 gir1.2-gst-plugins-base-1.0
 
 env:
   - TOX_ENV=py27
