@@ -5,13 +5,11 @@ python:
   - "2.7"
 
 before_install:
- - pyenv versions
- - pyenv global 2.7.14 # Tornado needs at least 2.7.9, and Travis default is 2.7.6, but it's got 2.7.14 available
- - pyenv versions
- - python -V
- - virtualenv --system-site-packages ~/virtualenv/pyenv
- - source ~/virtualenv/pyenv/bin/activate
- - echo $PATH
+  - |
+      if [[ -n "$PYENV_VERSION" ]]; then
+        wget https://github.com/praekeltfoundation/travis-pyenv/releases/download/0.4.0/setup-pyenv.sh
+        source setup-pyenv.sh
+      fi
 
 addons:
   apt:
@@ -26,8 +24,11 @@ cache:
   - apt
 
 env:
-  - TOX_ENV=py27
-  - TOX_ENV=flake8
+  global:
+    - PYENV_VERSION=2.7.14
+  matrix:
+    - TOX_ENV=py27
+    - TOX_ENV=flake8
 
 install:
   - "pip install tox"
