@@ -7,9 +7,9 @@ python:
 before_install:
   - |
       if [[ -n "$PYENV_VERSION" ]]; then
-        # Reset back to stock once https://github.com/praekeltfoundation/travis-pyenv/pull/15 gets merged
-        wget https://raw.githubusercontent.com/palfrey/travis-pyenv/preintalled-python/setup-pyenv.sh
-        source setup-pyenv.sh
+        # Reset back to stock once https://github.com/praekeltfoundation/travis-pyenv releases > 0.4
+        wget https://raw.githubusercontent.com/praekeltfoundation/travis-pyenv/67a858785097f7904a93b1355f6044a80f51ec6f/setup-pyenv.sh
+        VIRTUALENV_EXTRA_ARGS=--system-site-packages source setup-pyenv.sh
       fi
 
 addons:
