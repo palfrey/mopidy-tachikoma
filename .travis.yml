@@ -9,8 +9,9 @@ before_install:
       if [[ -n "$PYENV_VERSION" ]]; then
         # Reset back to stock once https://github.com/praekeltfoundation/travis-pyenv releases > 0.4
         wget https://raw.githubusercontent.com/praekeltfoundation/travis-pyenv/67a858785097f7904a93b1355f6044a80f51ec6f/setup-pyenv.sh
-        VIRTUALENV_EXTRA_ARGS=--system-site-packages source setup-pyenv.sh
+        source setup-pyenv.sh
       fi
+      ln -s /usr/lib/python2.7/dist-packages/gi $VIRTUAL_ENV/lib/python2.7/site-packages/
 
 addons:
   apt:
