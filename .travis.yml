@@ -11,7 +11,9 @@ before_install:
         wget https://raw.githubusercontent.com/praekeltfoundation/travis-pyenv/67a858785097f7904a93b1355f6044a80f51ec6f/setup-pyenv.sh
         source setup-pyenv.sh
       fi
+      echo $VIRTUAL_ENV
       ln -s /usr/lib/python2.7/dist-packages/gi $VIRTUAL_ENV/lib/python2.7/site-packages/
+      ls $VIRTUAL_ENV/lib/python2.7/site-packages/
 
 addons:
   apt:
