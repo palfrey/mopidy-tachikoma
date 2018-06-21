@@ -26,8 +26,9 @@ def workaround_empty_post_body(request):
 		scrubbing secrets from POST requests without a body. """
 	if request.method == 'POST' and not request.body:
 		request.body = b''
-	# manually perform filter_post_data_parameters=['token'],
-	return vcr.filters.replace_post_data_parameters(request, ['token'])
+	# manually perform filter_post_data_parameters={'token': None}
+	return vcr.filters.replace_post_data_parameters(
+		request, {'token': None})
 
 
 class WebSocketForTest(websocket.WebSocket):
