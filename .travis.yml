@@ -1,25 +1,39 @@
-sudo: true
 dist: trusty
 
 language: python
-
 python:
-  - "2.7_with_system_site_packages"
+  - "2.7"
+
+before_install:
+  - |
+      if [[ -n "$PYENV_VERSION" ]]; then
+        # Reset back to stock once https://github.com/praekeltfoundation/travis-pyenv releases > 0.4
+        wget https://raw.githubusercontent.com/praekeltfoundation/travis-pyenv/67a858785097f7904a93b1355f6044a80f51ec6f/setup-pyenv.sh
+        source setup-pyenv.sh
+      fi
+      ln -s /usr/lib/python2.7/dist-packages/gi /opt/pyenv/versions/2.7.14/lib/python2.7/site-packages/
+
+addons:
+  apt:
+    update: true
+    packages:
+    - python-gi
+    - gir1.2-gstreamer-1.0
+    - gir1.2-gst-plugins-base-1.0
 
 cache:
   - pip
   - apt
 
-before_install:
-  - sudo apt-get -qq update
-  - sudo apt-get install -y python-gi gir1.2-gstreamer-1.0 gir1.2-gst-plugins-base-1.0
-
 env:
-  - TOX_ENV=py27
-  - TOX_ENV=flake8
+  global:
+    - PYENV_VERSION=2.7.14
+  matrix:
+    - TOX_ENV=py27
+    - TOX_ENV=flake8
 
 install:
-  - "pip install tox"
+  - "pip install tox tox-pyenv"
 
 script:
   - "tox -e $TOX_ENV"

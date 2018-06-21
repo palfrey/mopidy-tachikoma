@@ -20,6 +20,17 @@ def decompress_response(response):
 	return response
 
 
+# Workaround for https://github.com/kevin1024/vcrpy/issues/362
+def workaround_empty_post_body(request):
+	""" Workaround a bug in VCR.py where it can't handle
+		scrubbing secrets from POST requests without a body. """
+	if request.method == 'POST' and not request.body:
+		request.body = b''
+	# manually perform filter_post_data_parameters={'token': None}
+	return vcr.filters.replace_post_data_parameters(
+		request, {'token': None})
+
+
 class WebSocketForTest(websocket.WebSocket):
 	def __init__(self, *args, **kwargs):
 		super(WebSocketForTest, self).__init__(*args, **kwargs)
@@ -56,12 +67,12 @@ def patched_bot(func):
 		with vcr.use_cassette(
 			"tests/slack_responses.yaml",
 			record_mode='none',
-			filter_post_data_parameters=['token'],
+			before_record_request=workaround_empty_post_body,
 			before_record_response=decompress_response):
 			global _websocket
 			_websocket = WebSocketForTest()
 			with mock.patch(
-				"slackclient._server.create_connection",
+				"slackclient.server.create_connection",
 				return_value=_websocket):
 				func(*args, **kwargs)
 	return func_wrapper

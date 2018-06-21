@@ -4,27 +4,31 @@
 #
 #    pip-compile --output-file requirements.txt requirements.in
 #
-backports-abc==0.4        # via tornado
-certifi==2016.8.31        # via tornado
+atomicwrites==1.1.5       # via pytest
+attrs==18.1.0             # via pytest
+backports-abc==0.5        # via tornado
+certifi==2018.4.16        # via requests
+chardet==3.0.4            # via requests
 clonedigger==1.1.0
-contextlib2==0.5.4        # via vcrpy
-funcsigs==1.0.2           # via mock
+contextlib2==0.5.5        # via vcrpy
+funcsigs==1.0.2           # via mock, pytest
+futures==3.2.0            # via tornado
+idna==2.6                 # via requests
 mock==2.0.0               # via vcrpy
-mopidy==2.0.1
-pbr==1.10.0               # via mock
-py==1.4.31                # via pytest
-Pykka==1.2.1              # via mopidy
-pytest==3.0.2
-PyYAML==3.12              # via vcrpy
-requests==2.11.1          # via mopidy, slackclient
+mopidy==2.1.0
+more-itertools==4.2.0     # via pytest
+pbr==4.0.4                # via mock
+pluggy==0.6.0             # via pytest
+py==1.5.3                 # via pytest
+pykka==1.2.1              # via mopidy
+pytest==3.6.1
+pyyaml==3.12              # via vcrpy
+requests==2.18.4          # via mopidy, slackclient
 singledispatch==3.4.0.3   # via tornado
-six==1.10.0               # via mock, singledispatch, slackclient, vcrpy, websocket-client
-slackclient==1.0.1
-tornado==4.4.1            # via mopidy
-vcrpy==1.10.0
-websocket-client==0.37.0  # via slackclient
-wrapt==1.10.8             # via vcrpy
-
-# The following packages are commented out because they are
-# considered to be unsafe in a requirements file:
-# setuptools                # via clonedigger, mopidy
+six==1.11.0               # via mock, more-itertools, pytest, singledispatch, slackclient, vcrpy, websocket-client
+slackclient==1.2.1
+tornado==5.0.2            # via mopidy
+urllib3==1.22             # via requests
+vcrpy==1.12.0
+websocket-client==0.48.0  # via slackclient
+wrapt==1.10.11            # via vcrpy
