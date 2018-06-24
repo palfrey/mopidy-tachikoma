@@ -23,7 +23,7 @@ py==1.5.3                 # via pytest
 pykka==1.2.1              # via mopidy
 pytest==3.6.1
 pyyaml==3.12              # via vcrpy
-requests==2.18.4          # via mopidy, slackclient
+requests==2.19.1          # via mopidy, slackclient
 singledispatch==3.4.0.3   # via tornado
 six==1.11.0               # via mock, more-itertools, pytest, singledispatch, slackclient, vcrpy, websocket-client
 slackclient==1.2.1
