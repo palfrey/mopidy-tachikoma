@@ -21,7 +21,7 @@ pbr==4.0.4                # via mock
 pluggy==0.6.0             # via pytest
 py==1.5.3                 # via pytest
 pykka==1.2.1              # via mopidy
-pytest==3.6.1
+pytest==3.6.2
 pyyaml==3.12              # via vcrpy
 requests==2.18.4          # via mopidy, slackclient
 singledispatch==3.4.0.3   # via tornado
