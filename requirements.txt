@@ -19,7 +19,7 @@ mopidy==2.1.0
 more-itertools==4.2.0     # via pytest
 pbr==4.0.4                # via mock
 pluggy==0.6.0             # via pytest
-py==1.5.3                 # via pytest
+py==1.5.4                 # via pytest
 pykka==1.2.1              # via mopidy
 pytest==3.6.2
 pyyaml==3.12              # via vcrpy
