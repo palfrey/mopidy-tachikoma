@@ -39,7 +39,7 @@ class TachikomaFrontend(pykka.ThreadingActor, CoreListener):
 			try:
 				current_track = self.core.playback.get_current_track().get(3)
 			except pykka.Timeout, e:
-				logger.warning("Failure to get current track", e)
+				logger.warning("Failure to get current track: %r", e)
 				current_track = None
 			return self.doSlackLoop(last_track_told, current_track, items)
 		else:
