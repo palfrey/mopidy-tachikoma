@@ -22,3 +22,12 @@ Installation
 3. Set "slack_token" in `mopidy.config` to the API Token it provides
 4. Restart Mopidy
 5. Add the bot to any channels you'd like it to tell you about new songs on
+
+Development
+-----------
+
+We use [Pipenv](https://docs.pipenv.org/) to manage all the things
+
+1. [Install Pipenv](https://docs.pipenv.org/#install-pipenv-today)
+2. `pipenv install --site-packages`
+3. `pipenv shell`
