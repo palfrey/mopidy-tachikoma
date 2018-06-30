@@ -1,17 +1,13 @@
 dist: trusty
+sudo: false
 
-language: python
-python:
-  - "2.7"
+language: generic
 
 before_install:
-  - |
-      if [[ -n "$PYENV_VERSION" ]]; then
-        # Reset back to stock once https://github.com/praekeltfoundation/travis-pyenv releases > 0.4
-        wget https://raw.githubusercontent.com/praekeltfoundation/travis-pyenv/67a858785097f7904a93b1355f6044a80f51ec6f/setup-pyenv.sh
-        source setup-pyenv.sh
-      fi
-      ln -s /usr/lib/python2.7/dist-packages/gi /opt/pyenv/versions/2.7.14/lib/python2.7/site-packages/
+  - pip install --user pipenv
+  - pipenv --python 2.7 install --dev
+  # --site-packages doesn't get what we need, so need to hack around it
+  - ln -s /usr/lib/python2.7/dist-packages/gi .venv/lib/python2.7/site-packages/
 
 addons:
   apt:
@@ -27,19 +23,16 @@ cache:
 
 env:
   global:
-    - PYENV_VERSION=2.7.14
-  matrix:
-    - TOX_ENV=py27
-    - TOX_ENV=flake8
-
-install:
-  - "pip install tox tox-pyenv"
+    - PIPENV_IGNORE_VIRTUALENVS=1
+    - PIPENV_VENV_IN_PROJECT=1
 
 script:
-  - "tox -e $TOX_ENV"
+  - pipenv run flake8 --ignore=W191,I201 --exclude .venv
+  - pipenv check
+  - pipenv run py.test -n 1 -v --cov=mopidy_tachikoma --cov-report=term-missing --cov-fail-under=100
 
 after_success:
-  - "if [ $TOX_ENV == 'py27' ]; then pip install coveralls; coveralls; fi"
+  - coveralls
 
 deploy:
   provider: pypi
