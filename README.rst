@@ -7,6 +7,10 @@ Mopidy-Tachikoma
     :target: https://travis-ci.org/palfrey/mopidy-tachikoma
 .. image:: https://coveralls.io/repos/github/palfrey/mopidy-tachikoma/badge.svg?branch=master
     :target: https://coveralls.io/github/palfrey/mopidy-tachikoma?branch=master
+.. image:: https://pyup.io/repos/github/palfrey/mopidy-tachikoma/shield.svg
+     :target: https://pyup.io/repos/github/palfrey/mopidy-tachikoma/
+.. image:: https://pyup.io/repos/github/palfrey/mopidy-tachikoma/python-3-shield.svg
+     :target: https://pyup.io/repos/github/palfrey/mopidy-tachikoma/
 
 `Mopidy <http://mopidy.com>`_ extension for talking to `Slack <https://slack.com>`_
 
