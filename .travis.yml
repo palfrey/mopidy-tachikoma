@@ -28,7 +28,7 @@ script:
   - pipenv run py.test -n 1 -v --cov=mopidy_tachikoma --cov-report=term-missing --cov-fail-under=100
 
 after_success:
-  - "if [ $TOX_ENV == 'py27' ]; then pip install coveralls; coveralls; fi"
+  - coveralls
 
 deploy:
   provider: pypi
