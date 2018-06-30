@@ -302,11 +302,10 @@
         },
         "flake8": {
             "hashes": [
-                "sha256:603a3ae7c8030219fee084728ca02a8bbd3a51829cacf97b445172a46cb04662",
-                "sha256:b4c210c998f07d6ff24325dd91fbc011f2c37bcd6bf576b188de01d8656e970d"
+                "sha256:c7841163e2b576d435799169b78703ad6ac1bbb0f199994fc05f700b2a90ea37",
+                "sha256:7253265f7abd8b313e3892944044a365e3f4ac3fcdcfb4298f55ee9ddf188ba0"
             ],
-            "index": "pypi",
-            "version": "==3.0.4"
+            "version": "==3.5.0"
         },
         "flake8-import-order": {
             "hashes": [
