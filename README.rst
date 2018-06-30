@@ -26,8 +26,8 @@ Installation
 Development
 -----------
 
-We use [Pipenv](https://docs.pipenv.org/) to manage all the things
+We use `Pipenv <https://docs.pipenv.org/>`_ to manage all the things
 
-1. [Install Pipenv](https://docs.pipenv.org/#install-pipenv-today)
-2. `pipenv install --site-packages`
-3. `pipenv shell`
+1. `Install Pipenv https://docs.pipenv.org/#install-pipenv-today`_
+2. *pipenv install --site-packages*
+3. *pipenv shell*
