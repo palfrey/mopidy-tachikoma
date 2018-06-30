@@ -3,9 +3,8 @@
 *.swp
 .cache/
 .coverage
-.tox/
+.venv/
 MANIFEST
 build/
 dist/
-ENV/
 output.html

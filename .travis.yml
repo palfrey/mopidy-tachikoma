@@ -4,15 +4,6 @@ language: python
 python:
   - "2.7"
 
-before_install:
-  - |
-      if [[ -n "$PYENV_VERSION" ]]; then
-        # Reset back to stock once https://github.com/praekeltfoundation/travis-pyenv releases > 0.4
-        wget https://raw.githubusercontent.com/praekeltfoundation/travis-pyenv/67a858785097f7904a93b1355f6044a80f51ec6f/setup-pyenv.sh
-        source setup-pyenv.sh
-      fi
-      ln -s /usr/lib/python2.7/dist-packages/gi /opt/pyenv/versions/2.7.14/lib/python2.7/site-packages/
-
 addons:
   apt:
     update: true
@@ -27,16 +18,14 @@ cache:
 
 env:
   global:
-    - PYENV_VERSION=2.7.14
-  matrix:
-    - TOX_ENV=py27
-    - TOX_ENV=flake8
-
-install:
-  - "pip install tox tox-pyenv"
+    - PIPENV_VENV_IN_PROJECT=1
 
 script:
-  - "tox -e $TOX_ENV"
+  - pip install --user pipenv
+  - pipenv --python 2.7 --site-packages install --dev
+  - pipenv run flake8 --ignore=W191,I201 --exclude .venv
+  - pipenv check
+  - pipenv run py.test -n 1 -v --cov=mopidy_tachikoma --cov-report=term-missing --cov-fail-under=100
 
 after_success:
   - "if [ $TOX_ENV == 'py27' ]; then pip install coveralls; coveralls; fi"
