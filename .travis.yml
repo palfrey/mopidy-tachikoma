@@ -1,8 +1,7 @@
 dist: trusty
+sudo: false
 
-language: python
-python:
-  - "2.7"
+language: generic
 
 before_install:
   - pip install pipenv
@@ -22,6 +21,7 @@ cache:
 
 env:
   global:
+    - PIPENV_IGNORE_VIRTUALENVS=1
     - PIPENV_VENV_IN_PROJECT=1
 
 script:
