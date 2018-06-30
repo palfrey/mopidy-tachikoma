@@ -4,6 +4,10 @@ language: python
 python:
   - "2.7"
 
+before_install:
+  - pip install pipenv
+  - pipenv --python 2.7 --site-packages install --dev
+
 addons:
   apt:
     update: true
@@ -21,8 +25,6 @@ env:
     - PIPENV_VENV_IN_PROJECT=1
 
 script:
-  - pip install --user pipenv
-  - pipenv --python 2.7 --site-packages install --dev
   - pipenv run flake8 --ignore=W191,I201 --exclude .venv
   - pipenv check
   - pipenv run py.test -n 1 -v --cov=mopidy_tachikoma --cov-report=term-missing --cov-fail-under=100
