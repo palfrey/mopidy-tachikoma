@@ -4,7 +4,7 @@ sudo: false
 language: generic
 
 before_install:
-  - pip install pipenv
+  - pip install --user pipenv
   - pipenv --python 2.7 --site-packages install --dev
 
 addons:
