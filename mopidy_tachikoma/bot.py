@@ -88,6 +88,7 @@ class TachikomaFrontend(pykka.ThreadingActor, CoreListener):
 				last_track_told[channel] = current_track
 		return last_track_told
 
+
 if __name__ == "__main__":
 	config = {"tachikoma": {"slack_token": "sdfdsfdf"}}
 	core = None
