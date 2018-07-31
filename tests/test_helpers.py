@@ -53,6 +53,7 @@ class WebSocketForTest(websocket.WebSocket):
 	def recv(self):
 		return ''
 
+
 _websocket = None
 
 

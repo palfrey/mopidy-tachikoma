@@ -5,7 +5,7 @@ language: generic
 
 before_install:
   - pip install --user pipenv
-  - pipenv --python 2.7 install --dev
+  - pipenv --python 2.7 install --dev --deploy
   # --site-packages doesn't get what we need, so need to hack around it
   - ln -s /usr/lib/python2.7/dist-packages/gi .venv/lib/python2.7/site-packages/
 

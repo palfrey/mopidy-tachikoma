@@ -10,6 +10,7 @@ def get_version(filename):
         metadata = dict(re.findall("__([a-z]+)__ = '([^']+)'", fh.read()))
         return metadata['version']
 
+
 setup(
     name='Mopidy-Tachikoma',
     version=get_version('mopidy_tachikoma/__init__.py'),
