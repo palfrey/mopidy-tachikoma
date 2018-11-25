@@ -1,0 +1,9 @@
+pytest
+mopidy
+slackclient
+vcrpy
+#clonedigger
+
+pip-tools
+tox
+tox-pyenv

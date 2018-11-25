@@ -3,7 +3,8 @@
 *.swp
 .cache/
 .coverage
-.venv/
+.tox/
+ENV/
 MANIFEST
 build/
 dist/
