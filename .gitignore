@@ -8,3 +8,5 @@ MANIFEST
 build/
 dist/
 output.html
+.vscode/
+.pytest_cache/
