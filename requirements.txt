@@ -22,7 +22,7 @@ pathlib2==2.3.2           # via pytest
 pbr==5.1.1                # via mock
 pip-tools==3.1.0
 pluggy==0.8.0             # via pytest, tox
-py==1.7.0                 # via pytest, tox
+py==1.8.0                 # via pytest, tox
 pykka==1.2.1              # via mopidy
 pytest==3.10.1
 pyyaml==3.13              # via vcrpy
