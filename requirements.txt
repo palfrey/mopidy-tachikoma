@@ -16,7 +16,7 @@ funcsigs==1.0.2           # via mock, pytest
 futures==3.2.0            # via tornado
 idna==2.7                 # via requests
 mock==2.0.0               # via vcrpy
-mopidy==2.1.0
+mopidy==2.2.2
 more-itertools==4.3.0     # via pytest
 pathlib2==2.3.2           # via pytest
 pbr==5.1.1                # via mock
