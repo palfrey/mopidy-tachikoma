@@ -37,6 +37,6 @@ tox-pyenv==1.1.0
 tox==3.5.3
 urllib3==1.24.1           # via requests
 vcrpy==2.0.1
-virtualenv==16.1.0        # via tox
+virtualenv==16.5.0        # via tox
 websocket-client==0.54.0  # via slackclient
 wrapt==1.10.11            # via vcrpy
