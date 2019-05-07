@@ -15,7 +15,7 @@ filelock==3.0.10          # via tox
 funcsigs==1.0.2           # via mock, pytest
 futures==3.2.0            # via tornado
 idna==2.7                 # via requests
-mock==2.0.0               # via vcrpy
+mock==3.0.4               # via vcrpy
 mopidy==2.1.0
 more-itertools==4.3.0     # via pytest
 pathlib2==2.3.2           # via pytest
