@@ -4,7 +4,7 @@
 #
 #    pip-compile --output-file requirements.txt requirements.in
 #
-atomicwrites==1.2.1       # via pytest
+atomicwrites==1.3.0       # via pytest
 attrs==18.2.0             # via pytest
 backports-abc==0.5        # via tornado
 certifi==2018.10.15       # via requests
